@@ -1,6 +1,7 @@
 package com.kodilla.testing.library;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -96,34 +97,55 @@ class BookDirectoryTestSuite
         verify(libraryDatabaseMock, times(0)).listBooksWithCondition(anyString());
     }
 
+    @Nested()
     @DisplayName("Test that shows a list of books that you have borrowed")
-    @Test
-    void testlistBooksInHandsOf()
+    class TestHandsOfMethod
     {
-        // Given
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
-        List<Book> resultListOf0BorrowedBooks = new ArrayList<>();
-        List<Book> resultListOf1BorrowedBooks = generateListOfNBooks(1);
-        List<Book> resultListOf5BorrowedBooks = generateListOfNBooks(5);
+        @DisplayName("Test - empty list")
+        @Test
+        void testlistBooksInHandsOfEmpty()
+        {
+            // Given
+            BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+            List<Book> resultListOf0BorrowedBooks = new ArrayList<>();
+            when(libraryDatabaseMock.listBooksInHandsOf(new LibraryUser("Jan", "Nowak", "6602021204049")))
+                    .thenReturn(resultListOf0BorrowedBooks);
+            // When
+            List<Book> theListOf0BorrowedBooks = bookLibrary
+                    .listBooksInHandsOf(new LibraryUser("Jan", "Nowak", "6602021204049"));
+            // Then
+            assertEquals(0, theListOf0BorrowedBooks.size());
+        }
 
-        when(libraryDatabaseMock.listBooksInHandsOf(new LibraryUser("Jan", "Nowak", "6602021204049")))
-                .thenReturn(resultListOf0BorrowedBooks);
-        when(libraryDatabaseMock.listBooksInHandsOf(new LibraryUser("Anna", "Nowak", "6902025208089")))
-                .thenReturn(resultListOf1BorrowedBooks);
-        when(libraryDatabaseMock.listBooksInHandsOf(new LibraryUser("Wiktor", "Nowak", "9602011254545")))
-                .thenReturn(resultListOf5BorrowedBooks);
-        // When
-        List<Book> theListOf0BorrowedBooks = bookLibrary
-                .listBooksInHandsOf(new LibraryUser("Jan", "Nowak", "6602021204049"));
-        List<Book> theListOf1BorrowedBooks = bookLibrary
-                .listBooksInHandsOf(new LibraryUser("Anna", "Nowak", "6902025208089"));
-        List<Book> theListOf5BorrowedBooks = bookLibrary
-                .listBooksInHandsOf(new LibraryUser("Wiktor", "Nowak", "9602011254545"));
-
-        // Then
-        assertEquals(0, theListOf0BorrowedBooks.size());
-        assertEquals(1, theListOf1BorrowedBooks.size());
-        assertEquals(5, theListOf5BorrowedBooks.size());
-
+        @DisplayName("Test - one book")
+        @Test
+        void testlistBooksInHandsOfOneBook()
+        {
+            // Given
+            BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+            List<Book> resultListOf1BorrowedBooks = generateListOfNBooks(1);
+            when(libraryDatabaseMock.listBooksInHandsOf(new LibraryUser("Anna", "Nowak", "6902025208089")))
+                    .thenReturn(resultListOf1BorrowedBooks);
+            // When
+            List<Book> theListOf1BorrowedBooks = bookLibrary
+                    .listBooksInHandsOf(new LibraryUser("Anna", "Nowak", "6902025208089"));
+            // Then
+            assertEquals(1, theListOf1BorrowedBooks.size());
+        }
+        @DisplayName("Test - five books")
+        @Test
+        void testlistBooksInHandsOfFiveBooks()
+        {
+            // Given
+            BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+            List<Book> resultListOf5BorrowedBooks = generateListOfNBooks(5);
+            when(libraryDatabaseMock.listBooksInHandsOf(new LibraryUser("Wiktor", "Nowak", "9602011254545")))
+                    .thenReturn(resultListOf5BorrowedBooks);
+            // When
+            List<Book> theListOf5BorrowedBooks = bookLibrary
+                    .listBooksInHandsOf(new LibraryUser("Wiktor", "Nowak", "9602011254545"));
+            // Then
+            assertEquals(5, theListOf5BorrowedBooks.size());
+        }
     }
 }
