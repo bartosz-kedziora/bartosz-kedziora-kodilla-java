@@ -21,7 +21,8 @@ public class StreamMain
 
         PoemBeautifier poemBeautifier = new PoemBeautifier();
         poemBeautifier.beautify("Kodilla Java Course",(java)->java.toUpperCase());
-        poemBeautifier.beautify("Kodilla Java Course",(java)->java.toLowerCase());
-        poemBeautifier.beautify("Kodilla Java Course",(java)->java.substring(0,7));
+        poemBeautifier.beautify("Kodilla Java Course",(java)->"ABC " + java + " ABC");
+        poemBeautifier.beautify("Kodilla Java Course",(java)->"JAVA ".toLowerCase() + java + " MAGIC".toUpperCase());
+        poemBeautifier.beautify("Kodilla Java Course",(java)->"ECHO: " + java + " - "+ java.toUpperCase() + " - " + java.toLowerCase());
     }
 }
