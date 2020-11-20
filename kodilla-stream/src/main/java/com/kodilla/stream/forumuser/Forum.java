@@ -1,7 +1,5 @@
 package com.kodilla.stream.forumuser;
 
-import com.kodilla.stream.book.Book;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,8 @@ public final class Forum
         theForumUserStatistics.add(new ForumUser(7,"Wlodzimierz Rudy", 'M', 1997, 6, 6, 2));
     }
 
-    public List<ForumUser> getList() {
+    public List<ForumUser> getUserList()
+    {
         return new ArrayList<>(theForumUserStatistics);
     }
 }
