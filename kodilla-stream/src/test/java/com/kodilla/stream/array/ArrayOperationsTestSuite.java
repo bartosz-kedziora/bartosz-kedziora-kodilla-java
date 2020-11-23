@@ -18,7 +18,7 @@ public class ArrayOperationsTestSuite
         //When
         Double avgNumbers = getAverage(array);
         //Then
-        assertEquals(9.5, avgNumbers);
+        assertEquals(9.5, avgNumbers, 0.1);
     }
 }
 
