@@ -3,38 +3,48 @@ package com.kodilla.rps;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class Game
 {
-    int countRound = 0;
-    int resultUser = 0;
-    int resultComputer = 0;
-    private Items items;
+    private int countRound;
+    private int resultUser;
+    private int resultComputer;
+    private int numberWinRound;
+    private String imie;
+    private String userMove;
+    private String computerMove;
+    private String result;
+    private boolean end;
+    private boolean isWinner;
 
-    String imie;
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     void prepareGame() throws IOException
     {
-        System.out.println("Welcome to the game - Paper, shears, stone");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        isWinner = false;
+        resultUser = 0;
+        resultComputer = 0;
+        countRound = 0;
+        numberWinRound = 0;
+
+        System.out.println("Welcome to the game - Paper, Scissors, Rock");
         System.out.println("What is your name?");
         imie = reader.readLine();
         while (imie.equals(""))
         {
-            System.out.println("Error, Could you wrtie correct name");
-            imie=reader.readLine();
+            System.out.println("Error, Could you write correct name");
+            imie = reader.readLine();
         }
         System.out.println("Hello " + imie);
         System.out.println();
 
-        int num1;
         System.out.println("Select the win amount of rounds: ");
         while (true)
         {
             try
             {
-                num1 = Integer.parseInt(reader.readLine());
-                if (num1>0)
+                numberWinRound = Integer.parseInt(reader.readLine());
+                if (numberWinRound>0)
                 {
                     break;
                 }
@@ -45,29 +55,33 @@ public class Game
                 System.out.print("Try again: ");
             }
         }
-        System.out.println("The amount of rounds: " + num1);
-        panelGame();
+        System.out.println("The amount of rounds: " + numberWinRound);
     }
     void panelGame() throws IOException
     {
-        while(!(resultUser==3||resultComputer==3))
+        while(!end)
         {
-            System.out.println("Game panel");
+            System.out.println();
             System.out.println("Press the appropriate key: ");
             System.out.println("---------------------------------------------");
-            System.out.println("Key 1 - Play Stone");
-            System.out.println("Key 2 - Play Paper");
-            System.out.println("Key 3 - Play Shears");
+            if(!isWinner)
+            {
+                System.out.println("Key 1 - Play Rock");
+                System.out.println("Key 2 - Play Paper");
+                System.out.println("Key 3 - Play Scissors");
+            }
+
             System.out.println("Key X - End Game");
             System.out.println("Key N - New Game");
-            //uruchomienie gry od nowa, poprzedzone pytaniem "Czy na pewno zakończyć aktualną grę?",
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("---------------------------------------------");
             System.out.println("Your turn: ");
+
             String key;
             while (true)
             {
                 key = reader.readLine();
-                if (key.equals("1") || key.equals("2") || key.equals("3") || key.toLowerCase().contains("x") || key.toLowerCase().contains("n"))
+                if (key.equals("1") || key.equals("2") || key.equals("3")
+                        || key.toLowerCase().contains("x") || key.toLowerCase().contains("n"))
                 {
                     break;
                 }
@@ -76,70 +90,90 @@ public class Game
                     System.out.println("Try again: ");
                 }
             }
-            playGame(key);
-            System.out.println("Round nr " + countRound);
+
+            playGame(key,isWinner);
+
+            System.out.println(imie + " Move : " + userMove);
+            System.out.println("Computer Move : " + computerMove);
+            if(result.equals("Lose"))
+            {
+                System.out.println("Computer Win");
+            }
+            else if (result.equals("Win"))
+            {
+                System.out.println(imie + " Win");
+            }
+            else
+            {
+                System.out.println("Result: Draw");
+            }
             System.out.println(imie+ " : " + resultUser);
             System.out.println("Computer : " + resultComputer);
-            if(resultUser==3)
+            System.out.println("Round nr " + countRound);
+
+            if(resultUser==numberWinRound||resultComputer==numberWinRound)
             {
                 System.out.println("----------------------");
-                System.out.println("USER WIN");
-            }
-            else if (resultComputer==3)
-            {
-                System.out.println("----------------------");
-                System.out.println("COMPUTER WIN");
+                if(resultUser>resultComputer)
+                {
+                    System.out.println(imie + " WIN GAME");
+                }
+                else
+                {
+                    System.out.println("COMPUTER WIN GAME");
+                }
+                System.out.println(imie + " : " + resultUser + " , Computer:" + resultComputer);
+                isWinner=true;
             }
         }
-
-
     }
-
-    void playGame(String key) throws IOException
+    void playGame(String key, boolean isWinner) throws IOException
     {
-
-        System.out.println("Key: " + key);
-        if(key.toLowerCase().contains("1"))
+        Computer computer = new Computer();
+        if(!isWinner)
         {
             countRound++;
-            Items stone = new Stone();
-            fightGame(stone, playComputer());
+            Items itemMove;
+            Items itemMoveComputer;
+            if(key.toLowerCase().contains("1"))
+            {
+                itemMove = new Rock();
+                itemMoveComputer = computer.playComputer();
+                fightGame(itemMove, itemMoveComputer);
+            }
+            else if(key.toLowerCase().contains("2"))
+            {
+                itemMove = new Paper();
+                itemMoveComputer = computer.playComputer();
+                fightGame(itemMove, itemMoveComputer);
+            }
+            else if(key.toLowerCase().contains("3"))
+            {
+                itemMove = new Scissors();
+                itemMoveComputer = computer.playComputer();
+                fightGame(itemMove, itemMoveComputer);
+            }
         }
-        else if(key.toLowerCase().contains("2"))
-        {
-            countRound++;
-            Items stone = new Paper();
-            fightGame(stone, playComputer());
-        }
-        else if(key.toLowerCase().contains("3"))
-        {
-            countRound++;
-            Items stone = new Shears();
-            fightGame(stone, playComputer());
-        }
-        else if(key.toLowerCase().contains("x"))
+        if(key.toLowerCase().contains("x"))
         {
             endGame();
         }
-        else if(key.toLowerCase().contains("n"))
+        if(key.toLowerCase().contains("n"))
         {
             newGame();
         }
-//        System.out.println("Result battle: ");
-//        System.out.println("Result game: ");
-
     }
 
     void endGame() throws IOException
     {
         System.out.println("You are sure to end the game");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("(Y)es/(No): ");
+        System.out.println("(Y)es/(N)o: ");
         while (true)
         {
             String decision = reader.readLine();
             if (decision.toLowerCase().contains("y"))
             {
+                end=true;
                 break;
             }
             else if(decision.toLowerCase().contains("n"))
@@ -155,15 +189,13 @@ public class Game
     void newGame() throws IOException
     {
         System.out.println("You are sure to new the game");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("(Y)es/(No): ");
+        System.out.println("(Y)es/(N)o: ");
         while (true)
         {
             String decision = reader.readLine();
             if (decision.toLowerCase().contains("y"))
             {
-                countRound = 0;
-                prepareGame();
+                run();
             }
             else if(decision.toLowerCase().contains("n"))
             {
@@ -175,74 +207,58 @@ public class Game
             }
         }
     }
-
-
     public void fightGame(Items items, Items itemsComputer)
     {
-        System.out.println("My items: " + items.toString());
-        System.out.println("Computer items: " + itemsComputer.toString());
-        if (items instanceof Stone && itemsComputer instanceof Stone)
+        userMove = items.getClass().getSimpleName();
+        computerMove = itemsComputer.getClass().getSimpleName();
+        if(userMove.equals(computerMove))
         {
-            System.out.println("Draw");
+            result = "Draw";
         }
-        else if (items instanceof Paper && itemsComputer instanceof Paper)
+        else if (userMove.equals("Rock"))
         {
-            System.out.println("Draw");
+            if (computerMove.equals("Paper"))
+            {
+                result = "Lose";
+                resultComputer++;
+            }
+            else
+            {
+                result = "Win";
+                resultUser++;
+            }
         }
-        else if (items instanceof Shears && itemsComputer instanceof Shears)
+        else if (userMove.equals("Paper"))
         {
-            System.out.println("Draw");
+            if (computerMove.equals("Scissors"))
+            {
+                result = "Lose";
+                resultComputer++;
+            }
+            else
+            {
+                result = "Win";
+                resultUser++;
+            }
         }
-        else if (items instanceof Stone && itemsComputer instanceof Shears)
+        else if (userMove.equals("Scissors"))
         {
-            System.out.println("Win");
-            resultUser++;
-        }
-        else if (items instanceof Stone && itemsComputer instanceof Paper)
-        {
-            System.out.println("Lose");
-            resultComputer++;
-        }
-        else if (items instanceof Paper && itemsComputer instanceof Shears)
-        {
-            System.out.println("Lose");
-            resultComputer++;
-        }
-        else if (items instanceof Paper && itemsComputer instanceof Stone)
-        {
-            System.out.println("Win");
-            resultUser++;
-        }
-        else if (items instanceof Shears && itemsComputer instanceof Stone)
-        {
-            System.out.println("Lose");
-            resultComputer++;
-        }
-        else if (items instanceof Shears && itemsComputer instanceof Paper)
-        {
-            System.out.println("Win");
-            resultUser++;
+            if (computerMove.equals("Rock"))
+            {
+                result = "Lose";
+                resultComputer++;
+            }
+            else
+            {
+                result = "Win";
+                resultUser++;
+            }
         }
     }
-    Items playComputer()
+    void run() throws IOException
     {
-        Random randomGenerator = new Random();
-        int computerChoose=randomGenerator.nextInt(3)+1;
-        if(computerChoose==1)
-        {
-            return new Stone();
-        }
-        else if(computerChoose==2)
-        {
-            return new Paper();
-        }
-        else
-        {
-            return new Shears();
-        }
-
+        prepareGame();
+        panelGame();
     }
-
-
 }
 
