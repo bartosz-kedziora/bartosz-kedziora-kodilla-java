@@ -71,8 +71,8 @@ public class Game
                 System.out.println("Key 3 - Play Scissors");
             }
 
-            System.out.println("Key X - End Game");
-            System.out.println("Key N - New Game");
+            System.out.println("Key x - End Game");
+            System.out.println("Key n - New Game");
             System.out.println("---------------------------------------------");
             System.out.println("Your turn: ");
 
@@ -135,23 +135,25 @@ public class Game
             countRound++;
             Items itemMove;
             Items itemMoveComputer;
-            if(key.equals("1"))
-            {
-                itemMove = new Rock();
-                itemMoveComputer = computer.playComputer();
-                fightGame(itemMove, itemMoveComputer);
-            }
-            else if(key.equals("2"))
-            {
-                itemMove = new Paper();
-                itemMoveComputer = computer.playComputer();
-                fightGame(itemMove, itemMoveComputer);
-            }
-            else if(key.equals("3"))
-            {
-                itemMove = new Scissors();
-                itemMoveComputer = computer.playComputer();
-                fightGame(itemMove, itemMoveComputer);
+            switch (key) {
+                case "1" ->
+                {
+                    itemMove = new Rock();
+                    itemMoveComputer = computer.playComputer();
+                    fightGame(itemMove, itemMoveComputer);
+                }
+                case "2" ->
+                {
+                    itemMove = new Paper();
+                    itemMoveComputer = computer.playComputer();
+                    fightGame(itemMove, itemMoveComputer);
+                }
+                case "3" ->
+                {
+                    itemMove = new Scissors();
+                    itemMoveComputer = computer.playComputer();
+                    fightGame(itemMove, itemMoveComputer);
+                }
             }
         }
         if(key.equals("x"))
