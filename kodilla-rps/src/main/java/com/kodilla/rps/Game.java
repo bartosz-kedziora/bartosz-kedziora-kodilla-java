@@ -81,7 +81,7 @@ public class Game
             {
                 key = reader.readLine();
                 if (key.equals("1") || key.equals("2") || key.equals("3")
-                        || key.toLowerCase().contains("x") || key.toLowerCase().contains("n"))
+                        || key.equals("x") || key.equals("n"))
                 {
                     break;
                 }
@@ -135,30 +135,30 @@ public class Game
             countRound++;
             Items itemMove;
             Items itemMoveComputer;
-            if(key.toLowerCase().contains("1"))
+            if(key.equals("1"))
             {
                 itemMove = new Rock();
                 itemMoveComputer = computer.playComputer();
                 fightGame(itemMove, itemMoveComputer);
             }
-            else if(key.toLowerCase().contains("2"))
+            else if(key.equals("2"))
             {
                 itemMove = new Paper();
                 itemMoveComputer = computer.playComputer();
                 fightGame(itemMove, itemMoveComputer);
             }
-            else if(key.toLowerCase().contains("3"))
+            else if(key.equals("3"))
             {
                 itemMove = new Scissors();
                 itemMoveComputer = computer.playComputer();
                 fightGame(itemMove, itemMoveComputer);
             }
         }
-        if(key.toLowerCase().contains("x"))
+        if(key.equals("x"))
         {
             endGame();
         }
-        if(key.toLowerCase().contains("n"))
+        if(key.equals("n"))
         {
             newGame();
         }
@@ -167,16 +167,16 @@ public class Game
     void endGame() throws IOException
     {
         System.out.println("You are sure to end the game");
-        System.out.println("(Y)es/(N)o: ");
+        System.out.println("(y)es/(n)o: ");
         while (true)
         {
             String decision = reader.readLine();
-            if (decision.toLowerCase().contains("y"))
+            if (decision.equals("y"))
             {
                 end=true;
                 break;
             }
-            else if(decision.toLowerCase().contains("n"))
+            else if(decision.equals("n"))
             {
                 panelGame();
             }
@@ -189,15 +189,15 @@ public class Game
     void newGame() throws IOException
     {
         System.out.println("You are sure to new the game");
-        System.out.println("(Y)es/(N)o: ");
+        System.out.println("(y)es/(n)o: ");
         while (true)
         {
             String decision = reader.readLine();
-            if (decision.toLowerCase().contains("y"))
+            if (decision.equals("y"))
             {
                 run();
             }
-            else if(decision.toLowerCase().contains("n"))
+            else if(decision.equals("n"))
             {
                 panelGame();
             }
@@ -261,4 +261,3 @@ public class Game
         panelGame();
     }
 }
-
