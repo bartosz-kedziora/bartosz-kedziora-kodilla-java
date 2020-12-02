@@ -17,6 +17,26 @@ public class Game
     private boolean end;
     private boolean isWinner;
 
+    enum Key
+    {
+        ROCK("1"),
+        PAPER("2"),
+        SCISSORS("3"),
+        END ("x"),
+        NEW ("n");
+
+        private final String levelCode2;
+
+        public String getLevelCode2()
+        {
+            return levelCode2;
+        }
+
+        Key(String levelCode2)
+        {
+            this.levelCode2 = levelCode2;
+        }
+    }
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     void prepareGame() throws IOException
@@ -76,12 +96,15 @@ public class Game
             System.out.println("---------------------------------------------");
             System.out.println("Your turn: ");
 
+
             String key;
             while (true)
             {
                 key = reader.readLine();
-                if (key.equals("1") || key.equals("2") || key.equals("3")
-                        || key.equals("x") || key.equals("n"))
+                if (key.equals(Key.ROCK.getLevelCode2()) || key.equals(Key.PAPER.getLevelCode2())
+                        || key.equals(Key.SCISSORS.getLevelCode2())
+                        || key.equals(Key.END.getLevelCode2())
+                        || key.equals(Key.NEW.getLevelCode2()))
                 {
                     break;
                 }
@@ -135,32 +158,31 @@ public class Game
             countRound++;
             Items itemMove;
             Items itemMoveComputer;
-            switch (key) {
-                case "1" ->
-                {
-                    itemMove = new Rock();
-                    itemMoveComputer = computer.playComputer();
-                    fightGame(itemMove, itemMoveComputer);
-                }
-                case "2" ->
-                {
-                    itemMove = new Paper();
-                    itemMoveComputer = computer.playComputer();
-                    fightGame(itemMove, itemMoveComputer);
-                }
-                case "3" ->
-                {
-                    itemMove = new Scissors();
-                    itemMoveComputer = computer.playComputer();
-                    fightGame(itemMove, itemMoveComputer);
-                }
+            if(key.equals(Key.ROCK.getLevelCode2()))
+            {
+                itemMove = new Rock();
+                itemMoveComputer = computer.playComputer();
+                fightGame(itemMove, itemMoveComputer);
+            }
+            else if(key.equals(Key.PAPER.getLevelCode2()))
+            {
+                itemMove = new Paper();
+                itemMoveComputer = computer.playComputer();
+                fightGame(itemMove, itemMoveComputer);
+            }
+            else if(key.equals(Key.SCISSORS.getLevelCode2()))
+            {
+                itemMove = new Scissors();
+                itemMoveComputer = computer.playComputer();
+                fightGame(itemMove, itemMoveComputer);
             }
         }
-        if(key.equals("x"))
+
+        if(key.equals(Key.END.getLevelCode2()))
         {
             endGame();
         }
-        if(key.equals("n"))
+        if(key.equals(Key.NEW.getLevelCode2()))
         {
             newGame();
         }
@@ -198,6 +220,7 @@ public class Game
             if (decision.equals("y"))
             {
                 run();
+                break;
             }
             else if(decision.equals("n"))
             {

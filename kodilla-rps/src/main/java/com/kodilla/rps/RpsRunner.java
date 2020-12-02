@@ -10,4 +10,3 @@ public class RpsRunner
         game.run();
     }
 }
-
