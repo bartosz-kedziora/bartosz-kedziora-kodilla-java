@@ -29,4 +29,13 @@ public class SearchFlights
                 .filter(f -> f.getFlightRoute().contains(stopovers))
                 .collect(Collectors.toList());
     }
+
+    public List<Flight> getViaStopovers(String stopover, String arrival, String depature) {
+        return flights.getFlightsList().stream()
+                .filter(f -> depature.equals(f.getFlightRoute().get(0)))
+                .filter(f -> arrival.equals(f.getFlightRoute().get(f.getFlightRoute().size() - 1)))
+                .filter(f -> f.getFlightRoute().contains(stopover))
+                .filter(f -> f.getFlightRoute().size()==3)
+                .collect(Collectors.toList());
+    }
 }
