@@ -5,9 +5,8 @@ import java.util.List;
 
 public class GlutenFreeShop implements Manufacturer
 {
-    private String NAME = "Gluten Free Shop";
+    private final String NAME = "Gluten Free Shop";
     private String ADRESS = "Zaborska 34, 34-190 Olsztyn";
-
     private final List<Product>productList = new ArrayList();
 
     @Override
@@ -45,5 +44,13 @@ public class GlutenFreeShop implements Manufacturer
                 ", ADRESS='" + ADRESS + '\'' +
                 ", productList=" + productList +
                 '}';
+    }
+
+    public String getADRESS() {
+        return ADRESS;
+    }
+
+    public void setADRESS(String ADRESS) {
+        this.ADRESS = ADRESS;
     }
 }

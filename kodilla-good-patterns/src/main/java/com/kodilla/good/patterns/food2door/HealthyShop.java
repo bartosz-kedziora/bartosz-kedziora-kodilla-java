@@ -6,7 +6,7 @@ import java.util.List;
 public class HealthyShop implements Manufacturer
 {
     private final String NAME = "Healthy Shop";
-    private final String ADRESS = "Zielona 3, 00-196 Warszawa";
+    private String ADRESS = "Zielona 3, 00-196 Warszawa";
     private final List<Product> productList = new ArrayList();
 
     @Override
@@ -44,5 +44,13 @@ public class HealthyShop implements Manufacturer
                 ", ADRESS='" + ADRESS + '\'' +
                 ", productList=" + productList +
                 '}';
+    }
+
+    public String getADRESS() {
+        return ADRESS;
+    }
+
+    public void setADRESS(String ADRESS) {
+        this.ADRESS = ADRESS;
     }
 }
