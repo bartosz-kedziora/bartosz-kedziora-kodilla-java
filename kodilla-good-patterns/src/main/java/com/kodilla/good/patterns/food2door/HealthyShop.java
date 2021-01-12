@@ -6,7 +6,7 @@ import java.util.List;
 public class HealthyShop implements Manufacturer
 {
     private final String NAME = "Healthy Shop";
-    private String ADRESS = "Zielona 3, 00-196 Warszawa";
+    private String Adress = "Zielona 3, 00-196 Warszawa";
     private final List<Product> productList = new ArrayList();
 
     @Override
@@ -41,16 +41,16 @@ public class HealthyShop implements Manufacturer
     public String toString() {
         return "HealthyShop{" +
                 "NAME='" + NAME + '\'' +
-                ", ADRESS='" + ADRESS + '\'' +
+                ", Adress='" + Adress + '\'' +
                 ", productList=" + productList +
                 '}';
     }
 
-    public String getADRESS() {
-        return ADRESS;
+    public String getAdress() {
+        return Adress;
     }
 
-    public void setADRESS(String ADRESS) {
-        this.ADRESS = ADRESS;
+    public void setAdress(String Adress) {
+        this.Adress = Adress;
     }
 }
