@@ -10,32 +10,26 @@ public class SearchFlights
     public SearchFlights(Flights flights) {
         this.flights = flights;
     }
-
-    public List<Flight> getArrival(String arrival) {
+    public List<Flight> findFlightArrival(String arrival)
+    {
         return flights.getFlightsList().stream()
-                .filter(f -> arrival.equals(f.getFlightRoute().get(f.getFlightRoute().size() - 1)))
-                .collect(Collectors.toList());
-    }
-    public List<Flight> getDepature(String depature) {
-        return flights.getFlightsList().stream()
-                .filter(f -> depature.equals(f.getFlightRoute().get(0)))
+                .filter(f -> arrival.equals(f.getArrival()))
                 .collect(Collectors.toList());
     }
 
-    public List<Flight> getStopovers(String stopovers) {
+    public List<Flight> findFlightDeparture(String departure)
+    {
         return flights.getFlightsList().stream()
-                .filter(f -> !stopovers.equals(f.getFlightRoute().get(0)))
-                .filter(f -> !stopovers.equals(f.getFlightRoute().get(f.getFlightRoute().size() - 1)))
-                .filter(f -> f.getFlightRoute().contains(stopovers))
+                .filter(f -> departure.equals(f.getDeparture()))
                 .collect(Collectors.toList());
     }
 
-    public List<Flight> getViaStopovers(String stopover, String arrival, String depature) {
-        return flights.getFlightsList().stream()
-                .filter(f -> depature.equals(f.getFlightRoute().get(0)))
-                .filter(f -> arrival.equals(f.getFlightRoute().get(f.getFlightRoute().size() - 1)))
-                .filter(f -> f.getFlightRoute().contains(stopover))
-                .filter(f -> f.getFlightRoute().size()==3)
+    public List<IntermediateFlight> findFlightStopover(String arrival, String departure)
+    {
+        return flights.getIntermediateFlights().stream()
+                .filter(f -> departure.equals(f.getDeparture()))
+                .filter(f -> arrival.equals(f.getArrival()))
                 .collect(Collectors.toList());
     }
 }
+
