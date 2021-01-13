@@ -13,22 +13,22 @@ public class SearchFlights
     public List<Flight> findFlightArrival(String arrival)
     {
         return flights.getFlightsList().stream()
-                .filter(f -> arrival.equals(f.getArrival()))
+                .filter(f -> arrival.equals(f.getArrivalAirport()))
                 .collect(Collectors.toList());
     }
 
     public List<Flight> findFlightDeparture(String departure)
     {
         return flights.getFlightsList().stream()
-                .filter(f -> departure.equals(f.getDeparture()))
+                .filter(f -> departure.equals(f.getDepartureAirport()))
                 .collect(Collectors.toList());
     }
 
     public List<IntermediateFlight> findFlightStopover(String arrival, String departure)
     {
         return flights.getIntermediateFlights().stream()
-                .filter(f -> departure.equals(f.getDeparture()))
-                .filter(f -> arrival.equals(f.getArrival()))
+                .filter(f -> departure.equals(f.getDepartureAirport()))
+                .filter(f -> arrival.equals(f.getArrivalAirport()))
                 .collect(Collectors.toList());
     }
 }

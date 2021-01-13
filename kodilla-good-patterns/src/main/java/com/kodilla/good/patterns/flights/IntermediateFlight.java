@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class IntermediateFlight
 {
-    private final String departure;
-    private final String arrival;
-    private final String stopover;
+    private final String departureAirport;
+    private final String arrivalAirport;
+    private final String stopoverAirport;
 
-    public String getDeparture() {
-        return departure;
+    public String getDepartureAirport() {
+        return departureAirport;
     }
 
-    public String getArrival() {
-        return arrival;
+    public String getArrivalAirport() {
+        return arrivalAirport;
     }
 
-    public String getStopover() {
-        return stopover;
+    public String getStopoverAirport() {
+        return stopoverAirport;
     }
 
-    public IntermediateFlight(String departure, String arrival, String stopover) {
-        this.departure = departure;
-        this.arrival = arrival;
-        this.stopover = stopover;
+    public IntermediateFlight(String departureAirport, String arrivalAirport, String stopoverAirport) {
+        this.departureAirport = departureAirport;
+        this.arrivalAirport = arrivalAirport;
+        this.stopoverAirport = stopoverAirport;
     }
 
     @Override
@@ -31,24 +31,22 @@ public class IntermediateFlight
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IntermediateFlight that = (IntermediateFlight) o;
-        return Objects.equals(departure, that.departure) &&
-                Objects.equals(arrival, that.arrival) &&
-                Objects.equals(stopover, that.stopover);
+        return Objects.equals(departureAirport, that.departureAirport) &&
+                Objects.equals(arrivalAirport, that.arrivalAirport) &&
+                Objects.equals(stopoverAirport, that.stopoverAirport);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(departure, arrival, stopover);
+        return Objects.hash(departureAirport, arrivalAirport, stopoverAirport);
     }
 
     @Override
     public String toString() {
         return "IntermediateFlight{" +
-                "departure='" + departure + '\'' +
-                ", arrival='" + arrival + '\'' +
-                ", stopover='" + stopover + '\'' +
+                "departureAirport='" + departureAirport + '\'' +
+                ", arrivalAirport='" + arrivalAirport + '\'' +
+                ", stopoverAirport='" + stopoverAirport + '\'' +
                 '}';
     }
-
-
 }
