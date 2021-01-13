@@ -15,7 +15,7 @@ public class test
         SearchFlights searchFlights = new SearchFlights(flights);
         System.out.println(searchFlights.findFlightArrival("Gdansk"));
         System.out.println(searchFlights.findFlightDeparture("Krakow"));
-        System.out.println(searchFlights.findFlightStopover("Warszawa", "Krakow"));
+        System.out.println(searchFlights.findFlightStopover("Warszawa", "Krakow", "Poznan"));
     }
 
 }

@@ -24,11 +24,12 @@ public class SearchFlights
                 .collect(Collectors.toList());
     }
 
-    public List<IntermediateFlight> findFlightStopover(String arrival, String departure)
+    public List<IntermediateFlight> findFlightStopover(String arrival, String departure, String stopoverAirport)
     {
         return flights.getIntermediateFlights().stream()
                 .filter(f -> departure.equals(f.getDepartureAirport()))
                 .filter(f -> arrival.equals(f.getArrivalAirport()))
+                .filter(f -> stopoverAirport.equals(f.getStopoverAirport()))
                 .collect(Collectors.toList());
     }
 }
