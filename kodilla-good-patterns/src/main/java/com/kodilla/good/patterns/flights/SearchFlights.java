@@ -1,5 +1,6 @@
 package com.kodilla.good.patterns.flights;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,13 +25,24 @@ public class SearchFlights
                 .collect(Collectors.toList());
     }
 
-    public List<IntermediateFlight> findFlightStopover(String arrival, String departure, String stopoverAirport)
+    public List<Flight> findFlightStopover(String arrival, String departure, String stopoverAirport)
     {
-        return flights.getIntermediateFlights().stream()
+                List<Flight> flightStopovers = new ArrayList<>();
+
+                List<Flight> flightStopoversTo = flights.getFlightsList().stream()
                 .filter(f -> departure.equals(f.getDepartureAirport()))
-                .filter(f -> arrival.equals(f.getArrivalAirport()))
-                .filter(f -> stopoverAirport.equals(f.getStopoverAirport()))
+                .filter(f -> stopoverAirport.equals(f.getArrivalAirport()))
                 .collect(Collectors.toList());
+
+                List<Flight> flightStopoversFrom = flights.getFlightsList().stream()
+                .filter(f -> stopoverAirport.equals(f.getDepartureAirport()))
+                .filter(f -> arrival.equals(f.getArrivalAirport()))
+                .collect(Collectors.toList());
+
+                flightStopovers.addAll(flightStopoversTo);
+                flightStopovers.addAll(flightStopoversFrom);
+
+                return flightStopovers;
     }
 }
 
