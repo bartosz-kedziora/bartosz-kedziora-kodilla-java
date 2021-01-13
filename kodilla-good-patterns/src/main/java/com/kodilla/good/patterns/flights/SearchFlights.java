@@ -11,22 +11,20 @@ public class SearchFlights
     public SearchFlights(Flights flights) {
         this.flights = flights;
     }
-    public List<Flight> findFlightArrival(String arrival)
-    {
+
+    public List<Flight> findFlightArrival(String arrival) {
         return flights.getFlightsList().stream()
                 .filter(f -> arrival.equals(f.getArrivalAirport()))
                 .collect(Collectors.toList());
     }
 
-    public List<Flight> findFlightDeparture(String departure)
-    {
+    public List<Flight> findFlightDeparture(String departure) {
         return flights.getFlightsList().stream()
                 .filter(f -> departure.equals(f.getDepartureAirport()))
                 .collect(Collectors.toList());
     }
 
-    public List<Flight> findFlightStopover(String arrival, String departure, String stopoverAirport)
-    {
+    public List<Flight> findFlightStopover(String arrival, String departure, String stopoverAirport) {
                 List<Flight> flightStopovers = new ArrayList<>();
 
                 List<Flight> flightStopoversTo = flights.getFlightsList().stream()

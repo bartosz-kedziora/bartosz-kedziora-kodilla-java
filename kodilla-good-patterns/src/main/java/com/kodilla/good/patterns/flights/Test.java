@@ -1,7 +1,6 @@
 package com.kodilla.good.patterns.flights;
 
-public class test
-{
+public class Test {
     public static void main(String[] args) {
         Flight flight1 = new Flight("Krakow" , "Gdansk");
         Flight flight2 = new Flight("Gdansk" , "Warszawa");
@@ -15,5 +14,4 @@ public class test
         SearchFlights searchFlights = new SearchFlights(flights);
         System.out.println(searchFlights.findFlightStopover("Warszawa", "Krakow", "Gdansk"));
     }
-
 }
