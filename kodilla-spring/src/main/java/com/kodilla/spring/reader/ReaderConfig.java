@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 public class ReaderConfig {
 
     @Autowired
-   @Qualifier("book1")
+    @Qualifier("book1")
     Book book;
 
     @Bean

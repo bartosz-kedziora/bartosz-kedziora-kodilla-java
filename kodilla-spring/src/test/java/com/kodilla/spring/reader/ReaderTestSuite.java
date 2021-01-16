@@ -1,10 +1,8 @@
 package com.kodilla.spring.reader;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
 public class ReaderTestSuite {
 
         @Test
@@ -15,7 +13,7 @@ public class ReaderTestSuite {
 
         //When & Then
         reader.read();
-    }
+        }
 
         @Test
         void testConditional() {
@@ -26,5 +24,4 @@ public class ReaderTestSuite {
                 //Then
                 System.out.println("Bean book2 was found in the container: " + book2Exists);
         }
-
 }

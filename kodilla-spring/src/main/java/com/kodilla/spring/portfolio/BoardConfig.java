@@ -25,5 +25,4 @@ public class BoardConfig {
     public TaskList getDoneList() {
         return new TaskList();
     }
-
 }
