@@ -9,7 +9,7 @@ public class LoggerTestSuite {
     void getLastLog()
     {
         //Given
-        Logger logger = new Logger();
+        Logger logger = Logger.INSTANCE;
         logger.log("Log Test");
         //When
         String logName = logger.getLastLog();
