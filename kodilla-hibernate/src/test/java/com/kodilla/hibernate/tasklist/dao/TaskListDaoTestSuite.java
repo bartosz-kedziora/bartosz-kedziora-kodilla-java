@@ -18,6 +18,7 @@ public class TaskListDaoTestSuite {
     private TaskListDao taskListDao;
     private static final String Name = "Exam";
 
+
     @Test
     void testTaskDaoSave() {
         //Given
@@ -33,7 +34,7 @@ public class TaskListDaoTestSuite {
 
         //CleanUp
         //taskListDao.deleteAll();
-        //taskListDao.deleteById(id);
+        taskListDao.deleteById(id);
     }
 
     @Test
@@ -45,6 +46,7 @@ public class TaskListDaoTestSuite {
         String listName = taskList.getListName();
 
         //When
+        taskListDao.save(taskList);
         List<TaskList> readTasksList = taskListDao.findByListName(listName);
 
         //Then
