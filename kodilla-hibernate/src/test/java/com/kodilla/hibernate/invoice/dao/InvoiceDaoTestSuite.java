@@ -43,7 +43,7 @@ public class InvoiceDaoTestSuite {
             invoiceDao.deleteById(invoiceId);
         }
         catch (Exception e){
-
+            System.out.println("Error: " +e.getMessage());
         }
     }
 }
