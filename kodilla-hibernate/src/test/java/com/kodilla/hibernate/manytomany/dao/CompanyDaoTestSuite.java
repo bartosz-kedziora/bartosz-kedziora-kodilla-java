@@ -103,12 +103,9 @@ class CompanyDaoTestSuite {
 
         //When
         List<Employee> lastNameEqualsParam = employeeDao.retrieveWithLastname("Smith");
-        List<Company> nameWithThreeFirstLetters = companyDao.retrieveWithThreeFirstLetters("Gre");
 
         //Then
         assertEquals(1, lastNameEqualsParam.size());
-        assertEquals(2, nameWithThreeFirstLetters.size());
-
 
         //CleanUp
         try {
