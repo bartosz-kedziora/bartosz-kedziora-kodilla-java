@@ -13,7 +13,6 @@ public class RunSudokuGame {
         Scanner scanner = new Scanner(System.in);
         CommandValidator commandValidator = new CommandValidator();
         SudokuGame sudokuGame = new SudokuGame();
-
         sudokuBoard = sudokuGame.createNewGame();
 
         while (!gameFinished) {
@@ -25,16 +24,14 @@ public class RunSudokuGame {
                     break;
                 case "sudoku":
                     SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
-                    //obczaić why
                     if (sudokuSolver.solveSudoku(0,0)) {
                         for (int i = 0; i < 9; i++) {
                             for (int j = 0; j < 9; j++) {
                                 sudokuBoard.get(i).get(j).getAvailableValues().clear();
-                                sudokuBoard.get(i).get(j).getAvailableValues().add(0);
                             }
                         }
                     } else {
-                        System.out.println("Array has no solution! please modify an element..");
+                        System.out.println("Game has no solution! Please choose a new game");
                     }
                     break;
                 case "exit":

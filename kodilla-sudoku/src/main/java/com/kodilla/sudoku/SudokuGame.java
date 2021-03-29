@@ -23,13 +23,13 @@ public class SudokuGame {
                 }
                 if (columnIndex == 8) {
                     switch (rowIndex) {
-                        case 0 -> System.out.print("            r - row (1..9)");
-                        case 1 -> System.out.print("            c - column (1..9)");
-                        case 2 -> System.out.print("            v - value (1..9 or 0 to empty)");
-                        case 3 -> System.out.print("          type 'rcv,rcv,...,' to insert values");
+                        case 0 -> System.out.print("            r - row (1...9)");
+                        case 1 -> System.out.print("            c - column (1...9)");
+                        case 2 -> System.out.print("            v - value (1...9 or 0 to empty)");
+                        case 3 -> System.out.print("          type 'rcv' to insert values");
                         case 4 -> System.out.print("          type 'exit' to finish");
                         case 5 -> System.out.print("          type 'sudoku' to find a solution");
-                        case 6 -> System.out.print("          type 'new game' to reset");
+                        case 6 -> System.out.print("          type 'new game' to reset game");
                         case 7 -> System.out.print("         .......................................");
                         case 8 -> System.out.print("                                      good luck!");
                     }
@@ -39,7 +39,7 @@ public class SudokuGame {
         }
         System.out.println(" ");
     }
-    //??
+
     private void addToAffectedElements(int currentValue, int row, int column) {
         for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
             sudokuBoard.get(row).get(columnIndex).addToAvailableValues(currentValue);
@@ -78,11 +78,11 @@ public class SudokuGame {
         int row, column, currentValue, insertValue;
 
         try {
-            for (int stringIndex = 0; stringIndex < command.length() / 4; stringIndex++) {
-                row = Character.getNumericValue(command.charAt(stringIndex * 4)) - 1;
-                column = Character.getNumericValue(command.charAt((stringIndex * 4) + 1)) - 1;
+            for (int stringIndex = 0; stringIndex < command.length() / 3; stringIndex++) {
+                row = Character.getNumericValue(command.charAt(stringIndex * 3)) - 1;
+                column = Character.getNumericValue(command.charAt((stringIndex * 3) + 1)) - 1;
                 currentValue = sudokuBoard.get(row).get(column).getValue();
-                insertValue = Character.getNumericValue(command.charAt((stringIndex * 4) + 2));
+                insertValue = Character.getNumericValue(command.charAt((stringIndex * 3) + 2));
 
                 if (currentValue == insertValue) {
                     System.out.println("The value " + insertValue + " is already there at row " + (row + 1) + ", column " + (column + 1));
@@ -111,6 +111,5 @@ public class SudokuGame {
             sudokuBoard.add(rowList);
         }
         return sudokuBoard;
-
     }
 }
