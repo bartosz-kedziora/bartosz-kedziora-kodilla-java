@@ -90,7 +90,7 @@ public class SudokuGame {
                     if (sudokuBoard.get(row).get(column).setValue(insertValue)) {
                         updateAffectedElements(currentValue, insertValue, row, column);
                     } else {
-                        System.out.println("Illegal to insert " + insertValue + " to row " + (row + 1) + ", column " + (column + 1) + " due to an other existing value. Please try something else..");
+                        System.out.println("Illegal to insert " + insertValue + " to row " + (row + 1) + ", column " + (column + 1) + " due to an other existing value. Please try something else...");
                     }
                 }
             }
