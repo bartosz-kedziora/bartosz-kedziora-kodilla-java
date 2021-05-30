@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class FileReader {
@@ -12,7 +13,7 @@ public class FileReader {
     public void readFile() throws FileReaderException
     {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("names.txt").getFile());
+        File file = new File(Objects.requireNonNull(classLoader.getResource("names.txt")).getFile());
 
         try (Stream<String> fileLines = Files.lines(Paths.get(file.getPath()))) {
             fileLines.forEach(System.out::println);
@@ -25,7 +26,7 @@ public class FileReader {
     public void readFile(final String fileName) throws FileReaderException {
         ClassLoader classLoader = getClass().getClassLoader();
 
-        try (Stream<String> fileLines = Files.lines(Path.of(classLoader.getResource(fileName).toURI()))) {
+        try (Stream<String> fileLines = Files.lines(Path.of(Objects.requireNonNull(classLoader.getResource(fileName)).toURI()))) {
             fileLines.forEach(System.out::println);
         } catch (Exception e) {
             throw new FileReaderException();
