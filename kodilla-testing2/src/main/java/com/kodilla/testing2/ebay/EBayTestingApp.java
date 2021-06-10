@@ -5,12 +5,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Optional;
+
 public class EBayTestingApp {
     public static final String SEARCHFIELD = "_nkw";
 
     public static void main(String[] args) {
-        WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
-        assert driver != null;
+        WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME)
+                .orElseThrow(() -> new RuntimeException("No such driver exception"));
+
+        Optional.ofNullable(driver);
         driver.get("https://www.ebay.com");
 
         WebElement searchField = driver.findElement(By.name(SEARCHFIELD));

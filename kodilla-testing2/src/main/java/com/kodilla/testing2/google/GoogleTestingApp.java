@@ -9,7 +9,8 @@ public class GoogleTestingApp {
     public static final String SEARCHFIELD = "q";                       // [1]
 
     public static void main(String[] args) {
-        WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME); // [2]
+        WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME)
+                .orElseThrow(() -> new RuntimeException("No such driver exception"));
         assert driver != null;
         driver.get("https://www.google.com");                                 // [3]
 
