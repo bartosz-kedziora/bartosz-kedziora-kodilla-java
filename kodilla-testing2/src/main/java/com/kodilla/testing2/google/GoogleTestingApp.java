@@ -6,17 +6,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class GoogleTestingApp {
-    public static final String SEARCHFIELD = "q";                       // [1]
+    public static final String SEARCHFIELD = "q";
 
     public static void main(String[] args) {
         WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME)
                 .orElseThrow(() -> new RuntimeException("No such driver exception"));
         assert driver != null;
-        driver.get("https://www.google.com");                                 // [3]
+        driver.get("https://www.google.com");
 
         WebElement searchField = driver.findElement(By.name(SEARCHFIELD));
         searchField.getText();
         searchField.sendKeys("kodilla");
-        searchField.submit(); // [5]
+        searchField.submit();
     }
 }
